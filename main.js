@@ -2,22 +2,25 @@
 // Import http object
 const http = require("node:http");
 
+var menu = [
+  { id: 1, name: "Turkish Coffee", price: 3 },
+  { id: 2, name: "Americano", price: 4 },
+  { id: 3, name: "Iced Latte", price: 5 },
+];
+
 // Creating a server instance using createServer function
 const server = http.createServer(
   // Callback Arrow function (similar to anonymous functions)
   (req, res) => {
-    // define Http headers (meta data)
-    res.writeHead(200, { "Content-Type": "text/html" });
     // check for url
-    if (req.url === "/") {
-      res.end("<h1>Home Page</h1><p>Welcome to our website!</p>");
-    } else if (req.url === "/about") {
-      res.end("<h1>About Us</h1><p>This site was built with Node.js</p>");
-    } else if (req.url === "/contact") {
-      res.end("<h1>Contact Us</h1><p>Email: info@site.com</p>");
+    if (req.url === "/api/menu") {
+      // define Http headers (meta data)
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(menu));
     } else {
+      res.writeHead(200, { "Content-Type": "text/plain" });
       // sending the response object back to browser
-      res.end("<h1>Page Not Found</h1>");
+      res.end("Not Found");
     }
   }
 );
