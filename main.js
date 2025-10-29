@@ -7,6 +7,12 @@
 
 // console.log(module);
 
+// import logger module
+const loggerFunction = require("./logger");
+// ./ : current directory
+// ../ : parent directory
+// / : root directory of filesystem
+
 // var, let, const are used to define variables of node modules.
 
 // Import http object
@@ -47,6 +53,7 @@ const server = http.createServer(
   (req, res) => {
     // check for url
     if (req.url === "/api/menu") {
+      loggerFunction("Request came in!");
       // define Http headers (meta data)
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(menu));
