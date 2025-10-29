@@ -27,6 +27,14 @@ console.log(type);
 var freeMemory = os.freemem();
 console.log(freeMemory);
 
+// Install external modules from NPM registry
+// npm install <module_name> or npm i <module_name>
+const osPaths = require("os-paths/cjs");
+const home = osPaths.home();
+const temp = osPaths.temp();
+console.log(home);
+console.log(temp);
+
 var menu = [
   { id: 1, name: "Turkish Coffee", price: 3 },
   { id: 2, name: "Americano", price: 4 },
