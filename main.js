@@ -83,3 +83,14 @@ server.listen(3000, "127.0.0.1", () => {
 });
 
 // run with `node main.js`
+
+// Semantic Versioning
+// Major.Minor.Patch
+// Caret(^): ^1.2.2 means install the latest version of 1.x.x
+// Tilda(~): ~1.2.2 means install the latest version of 1.2.x
+
+// How can we update our packages?
+// npm outdated
+// npm update
+// npm install <package-name>@1.2.2
+// npm install <package-name>@latest
