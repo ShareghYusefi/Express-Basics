@@ -89,7 +89,15 @@ myEmitter.emit("fire");
 
 app.get("/", (req, res) => {
   loggerFunction("Request came in again!");
-  res.send("Hello World");
+  res.end("<h1>Home Page</h1><p>Welcome to our website!</p>");
+});
+
+app.get("/about", (req, res) => {
+  res.end("<h1>About Us</h1><p>This site was built with Node.js</p>");
+});
+
+app.get("/contact", (req, res) => {
+  res.end("<h1>Contact Us</h1><p>Email: info@site.com</p>");
 });
 
 app.listen(3000, "127.0.0.1", () => {
