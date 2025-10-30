@@ -1,6 +1,11 @@
 // What are modules in Node?
 // Modules are like libraries in node. They are reusable blocks of code. There are built in modules provided by node and third party modules available on the web.
 
+// What is express?
+// Express is used to create a web server in node. Express works on a middleware concept(callback function).
+const express = require("express");
+const app = express();
+
 // Any file in a node is considered a module, giving us the ability to import and export code between files.
 
 // An Http Server is responsible for managing Http requests coming in from a browser
@@ -48,22 +53,22 @@ var menu = [
 ];
 
 // Creating a server instance using createServer function
-const server = http.createServer(
-  // Callback Arrow function (similar to anonymous functions)
-  (req, res) => {
-    // check for url
-    if (req.url === "/api/menu") {
-      loggerFunction("Request came in!");
-      // define Http headers (meta data)
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(menu));
-    } else {
-      res.writeHead(200, { "Content-Type": "text/plain" });
-      // sending the response object back to browser
-      res.end("Not Found");
-    }
-  }
-);
+// const server = http.createServer(
+//   // Callback Arrow function (similar to anonymous functions)
+//   (req, res) => {
+//     // check for url
+//     if (req.url === "/api/menu") {
+//       loggerFunction("Request came in!");
+//       // define Http headers (meta data)
+//       res.writeHead(200, { "Content-Type": "application/json" });
+//       res.end(JSON.stringify(menu));
+//     } else {
+//       res.writeHead(200, { "Content-Type": "text/plain" });
+//       // sending the response object back to browser
+//       res.end("Not Found");
+//     }
+//   }
+// );
 
 // events in node js
 const EventEmitter = require("node:events");
@@ -78,7 +83,16 @@ myEmitter.on("fire", () => {
 myEmitter.emit("fire");
 
 // starts a simple http server locally on port 3000
-server.listen(3000, "127.0.0.1", () => {
+// server.listen(3000, "127.0.0.1", () => {
+//   console.log("Listening on 127.0.0.1:3000");
+// });
+
+app.get("/", (req, res) => {
+  loggerFunction("Request came in again!");
+  res.send("Hello World");
+});
+
+app.listen(3000, "127.0.0.1", () => {
   console.log("Listening on 127.0.0.1:3000");
 });
 
