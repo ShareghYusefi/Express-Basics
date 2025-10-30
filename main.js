@@ -100,6 +100,10 @@ app.get("/contact", (req, res) => {
   res.end("<h1>Contact Us</h1><p>Email: info@site.com</p>");
 });
 
+app.get("/api/menu", (req, res) => {
+  res.json(menu);
+});
+
 app.listen(3000, "127.0.0.1", () => {
   console.log("Listening on 127.0.0.1:3000");
 });
