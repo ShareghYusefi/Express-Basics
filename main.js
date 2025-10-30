@@ -6,6 +6,17 @@
 const express = require("express");
 const app = express();
 
+// A middleware is a function that has access to the request, response, and next function.
+// You can think of it as a layer that sits between the request and response.
+function customMiddleware(req, res, next) {
+  console.log("Middleware function called!");
+  // next function is called to move onto the next middleware function
+  next();
+}
+
+// use the middlware function when a request comes in to the web server.
+app.use(customMiddleware);
+
 // Any file in a node is considered a module, giving us the ability to import and export code between files.
 
 // An Http Server is responsible for managing Http requests coming in from a browser
