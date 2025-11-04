@@ -65,12 +65,6 @@ const temp = osPaths.temp();
 console.log(home);
 console.log(temp);
 
-var menu = [
-  { id: 1, name: "Turkish Coffee", price: 3 },
-  { id: 2, name: "Americano", price: 4 },
-  { id: 3, name: "Iced Latte", price: 5 },
-];
-
 // Creating a server instance using createServer function
 // const server = http.createServer(
 //   // Callback Arrow function (similar to anonymous functions)
@@ -105,6 +99,60 @@ myEmitter.emit("fire");
 // server.listen(3000, "127.0.0.1", () => {
 //   console.log("Listening on 127.0.0.1:3000");
 // });
+
+// What is a Restful API?
+// Restful stand for Representational State Transfer.
+// API stands for Application Programming Interface.
+// A way to design your URL's to interact with a server.
+
+// API's use HTTP methods to interact with the server.
+// GET - Get data
+// POST - Send data
+// PATCH - Update data
+// PUT - Override data
+// DELETE - Delete data
+
+// Responses contain an HTTP Status Code
+// These are codes used to represent the status of the response from the server.
+// 200 - Success/Ok
+// 201 - Created
+// 404 - Not Found
+// 400 - Bad Request
+// 500 - Internal Server Error
+
+// URL stands for Uniform Resource Locator.
+// Resource is any type of data that we are storing on the server.
+
+// Mock data in Memory (instead of a database)
+var users = [
+  { id: 1, username: "JohnDoe", email: "JohnDoe@gmail.com" },
+  { id: 2, username: "JaneDoe", email: "JaneDoe@gmail.com" },
+  { id: 3, username: "JamesDow", email: "JamesDoe@gmail.com" },
+];
+
+// localhost:3000/users
+app.get("/users", (req, res) => {
+  res.status(200).send(users);
+});
+
+// localhost:3000/users/1
+app.get("/users/:id", (req, res) => {
+  // We can grand id from the URL query parameters
+  var id = parseInt(req.params.id); // convert string id to integer
+  //   find the user with id, the result is going be a user object
+  var user = users.find((u) => {
+    return u.id === id;
+  });
+
+  // if user is undefined, we return 404
+  if (!user) {
+    res.status(404).send({
+      message: "User not found.",
+    });
+  }
+
+  res.status(200).send(user);
+});
 
 app.get("/", (req, res) => {
   loggerFunction("Request came in again!");
