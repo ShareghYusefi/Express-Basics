@@ -154,6 +154,21 @@ app.get("/users/:id", (req, res) => {
   res.status(200).send(user);
 });
 
+// Post to create a user
+// localhost:3000/users
+app.post("/users", (req, res) => {
+  var newUser = {
+    id: users.length + 1,
+    username: req.body.username,
+    email: req.body.email,
+  };
+
+  // update mock database/array with new user
+  users.push(newUser);
+
+  res.status(201).send(newUser);
+});
+
 app.get("/", (req, res) => {
   loggerFunction("Request came in again!");
   res.end("<h1>Home Page</h1><p>Welcome to our website!</p>");
