@@ -4,7 +4,11 @@
 // What is express?
 // Express is used to create a web server in node. Express works on a middleware concept(callback function).
 const express = require("express");
+const cors = require("cors");
 const app = express();
+
+// Allows Cross-Origin-Resource sharing
+app.use(cors());
 
 // A middleware is a function that has access to the request, response, and next function.
 // You can think of it as a layer that sits between the request and response.
@@ -16,6 +20,10 @@ function customMiddleware(req, res, next) {
 
 // use the middlware function when a request comes in to the web server.
 app.use(customMiddleware);
+// parse JSON to Javascript Object for req.body
+app.use(express.json());
+// parse x-www-form-urlencoded to Javascript Object for req.body
+app.use(express.urlencoded({ extended: true }));
 
 // Any file in a node is considered a module, giving us the ability to import and export code between files.
 
@@ -113,6 +121,14 @@ app.get("/contact", (req, res) => {
 
 app.get("/api/menu", (req, res) => {
   res.json(menu);
+});
+
+app.post("/api/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(email, password);
+
+  res.json("You have logged in as " + email);
 });
 
 app.listen(3000, "127.0.0.1", () => {
