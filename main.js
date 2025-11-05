@@ -169,6 +169,30 @@ app.post("/users", (req, res) => {
   res.status(201).send(newUser);
 });
 
+// Patch to update a user
+// localhost:3000/users/1
+app.patch("/users/:id", (req, res) => {
+  // We can grand id from the URL query parameters
+  var id = parseInt(req.params.id); // convert string id to integer
+  //   find the user with id, the result is going be a user object
+  var user = users.find((u) => {
+    return u.id === id;
+  });
+
+  // if user is undefined, we return 404
+  if (!user) {
+    res.status(404).send({
+      message: "User not found.",
+    });
+  }
+
+  // update the user that is found
+  user.username = req.body.username;
+  user.email = req.body.email;
+
+  res.status(200).send(user);
+});
+
 app.get("/", (req, res) => {
   loggerFunction("Request came in again!");
   res.end("<h1>Home Page</h1><p>Welcome to our website!</p>");
